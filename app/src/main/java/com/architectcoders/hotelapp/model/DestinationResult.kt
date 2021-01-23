@@ -1,4 +1,4 @@
-package com.architectcoders.hotelapp
+package com.architectcoders.hotelapp.model
 
 data class DestinationResult(
         val term: String,

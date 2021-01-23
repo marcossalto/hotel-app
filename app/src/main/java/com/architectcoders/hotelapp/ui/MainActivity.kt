@@ -1,9 +1,10 @@
-package com.architectcoders.hotelapp
+package com.architectcoders.hotelapp.ui
 
 import android.os.Bundle
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import com.architectcoders.hotelapp.databinding.ActivityMainBinding
+import com.architectcoders.hotelapp.model.HotelRetrofit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
