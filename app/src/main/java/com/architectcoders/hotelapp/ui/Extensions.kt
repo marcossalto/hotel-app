@@ -1,4 +1,4 @@
-package com.architectcoders.hotelapp
+package com.architectcoders.hotelapp.ui
 
 import android.content.Context
 import android.view.LayoutInflater

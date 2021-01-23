@@ -1,5 +1,8 @@
-package com.architectcoders.hotelapp
+package com.architectcoders.hotelapp.model
 
+import com.architectcoders.hotelapp.API_BASE_URL
+import com.architectcoders.hotelapp.API_HOST
+import com.architectcoders.hotelapp.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
