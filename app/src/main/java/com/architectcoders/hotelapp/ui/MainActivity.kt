@@ -2,15 +2,13 @@ package com.architectcoders.hotelapp.ui
 
 import android.os.Bundle
 import android.widget.SearchView
-import androidx.appcompat.app.AppCompatActivity
 import com.architectcoders.hotelapp.databinding.ActivityMainBinding
 import com.architectcoders.hotelapp.model.HotelRetrofit
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import com.architectcoders.hotelapp.ui.common.CoroutineScopeActivity
 import kotlinx.coroutines.launch
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : CoroutineScopeActivity() {
     private val adapter = HotelAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setAdapter(query: String ){
-        GlobalScope.launch(Dispatchers.Main) {
+        launch {
             val destinationResult = HotelRetrofit.service.searchDestination(query, Locale.getDefault().toString())
             adapter.hotels = destinationResult.suggestions[1].entities
         }
