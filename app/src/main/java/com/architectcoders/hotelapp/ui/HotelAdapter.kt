@@ -9,7 +9,8 @@ import com.architectcoders.hotelapp.R
 import com.architectcoders.hotelapp.databinding.CustomListDestinationBinding
 import kotlin.properties.Delegates
 
-class HotelAdapter : RecyclerView.Adapter<HotelAdapter.ViewHolder>() {
+class HotelAdapter(private val listener: (Hotel) -> Unit) :
+        RecyclerView.Adapter<HotelAdapter.ViewHolder>() {
 
     var hotels: List<Hotel> by Delegates.observable(emptyList()) { _, old, new ->
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
@@ -33,7 +34,12 @@ class HotelAdapter : RecyclerView.Adapter<HotelAdapter.ViewHolder>() {
     override fun getItemCount(): Int = hotels.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(hotels[position])
+        val hotel = hotels[position]
+        holder.bind(hotel)
+        holder.itemView.setOnClickListener {
+            hotels = emptyList()
+            listener(hotel)
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

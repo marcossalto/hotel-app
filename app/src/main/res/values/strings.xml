@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">HotelApp</string>
+    <string name="tv_room">Habitaciones</string>
+    <string name="tv_checkin">CheckIn</string>
+    <string name="tv_checkout">CheckOut</string>
+    <string name="tv_adult">Adultos</string>
+    <string name="tv_child">Menores</string>
+    <string name="tv_top_price">Tope precio</string>
+    <string name="tv_ranking">Ranking</string>
+    <string name="tv_search">Buscar</string>
 </resources>
