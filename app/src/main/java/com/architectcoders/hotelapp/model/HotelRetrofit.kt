@@ -1,6 +1,5 @@
 package com.architectcoders.hotelapp.model
 
-import com.architectcoders.hotelapp.API_BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
