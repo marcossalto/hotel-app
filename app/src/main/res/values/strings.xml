@@ -8,4 +8,10 @@
     <string name="tv_top_price">Tope precio</string>
     <string name="tv_ranking">Ranking</string>
     <string name="tv_search">Buscar</string>
+    <string name="message_max_adults">Excedió el limite de adultos</string>
+    <string name="message_max_child">Excedió el limite de niños</string>
+    <string name="message_min_checkin">La fecha no puede ser menor a la actual</string>
+    <string name="message_empty_checkin">Debes seleccionar una fecha inicial</string>
+    <string name="message_min_checkout">La fecha no puede ser menor a la del CheckIn</string>
+    <string name="message_without_results">No existen resultados para esa busqueda</string>
 </resources>
