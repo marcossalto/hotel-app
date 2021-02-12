@@ -132,10 +132,10 @@ class MainActivity : CoroutineScopeActivity() {
             hideKeyboard()
             showDatePickerDialog(supportFragmentManager) {
                 with(binding.etCheckIn) {
-                    if (this.text.isEmpty()) {
+                    if (text.isEmpty()) {
                         etCheckOutInter.cleanAndShowError(message_empty_checkin)
                     } else {
-                        val checkInDateString = this.toString()
+                        val checkInDateString = toString()
 
                         if (isEqualOrGreaterThan(it, checkInDateString)) {
                             etCheckOutInter.setText(it)
@@ -154,7 +154,6 @@ class MainActivity : CoroutineScopeActivity() {
         with(binding.spRanking) {
             adapter = adapterRankingSpinner
             setSelection(0, false)
-            gravity = Gravity.CENTER
         }
     }
 
@@ -164,7 +163,6 @@ class MainActivity : CoroutineScopeActivity() {
         with(binding.spRoom) {
             adapter = adapterRoomSpinner
             setSelection(0, false)
-            gravity = Gravity.CENTER
         }
     }
 

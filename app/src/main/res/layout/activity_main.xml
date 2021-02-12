@@ -172,6 +172,7 @@
                     android:id="@+id/spRoom"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
@@ -227,6 +228,7 @@
                     android:id="@+id/spRanking"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
