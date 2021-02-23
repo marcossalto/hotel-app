@@ -14,6 +14,10 @@ fun Context.toast(message: Int) {
     Toast.makeText(this, getString(message), Toast.LENGTH_SHORT).show()
 }
 
+fun Context.toast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = true): View =
         LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 
@@ -39,3 +43,6 @@ fun showDatePickerDialog(supportFragmentManager: FragmentManager, listener: (Str
 fun Int.mod9(): Boolean {
     return this % 2 == 0 && this % 3 == 0
 }
+
+val String.capitalizeWords
+    get() = this.toLowerCase().split(" ").joinToString(" ") { it.capitalize() }
