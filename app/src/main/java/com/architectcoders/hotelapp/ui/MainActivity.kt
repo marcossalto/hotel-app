@@ -4,13 +4,13 @@ import android.R.layout.*
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.SearchView
+import android.widget.*
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.architectcoders.hotelapp.R.string.*
 import com.architectcoders.hotelapp.databinding.ActivityMainBinding
+import com.architectcoders.hotelapp.model.Country
 import com.architectcoders.hotelapp.model.HotelRetrofit
 import com.architectcoders.hotelapp.ui.common.CoroutineScopeActivity
 import kotlinx.coroutines.launch
@@ -19,6 +19,7 @@ import java.util.*
 
 class MainActivity : CoroutineScopeActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var localeSelected = Locale.getDefault().toString()
 
     private val rooms = arrayOf("1", "2", "3", "4", "5", "6", "7", "8")
     private val rankings = arrayOf("1", "2", "3", "4", "5")
@@ -48,6 +49,7 @@ class MainActivity : CoroutineScopeActivity() {
 
         initializeRoomSpinner()
         initializeRankingSpinner()
+        initializeCountrySpinner()
 
         textChangeEtAdult()
         textChangeEtChild()
@@ -148,6 +150,30 @@ class MainActivity : CoroutineScopeActivity() {
         }
     }
 
+    private fun initializeCountrySpinner() {
+        launch {
+            val countryList = HotelRetrofit.service.listCountries()
+            val adapterCountrySpinner = CountrySpinnerAdapter(this@MainActivity, countryList)
+            with(binding.spCountry) {
+                adapter = adapterCountrySpinner
+                val filtered = countryList.filter { l -> l.hcomLocale.contains(localeSelected)}
+                val indexLocale = countryList.indexOf(filtered.first())
+                setSelection(indexLocale, false)
+                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: View,
+                        position: Int,
+                        id: Long) {
+                        localeSelected = countryList[position].hcomLocale
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                }
+            }
+        }
+    }
+
     private fun initializeRankingSpinner() {
         val adapterRankingSpinner = ArrayAdapter(this, simple_spinner_item, rankings)
         adapterRankingSpinner.setDropDownViewResource(simple_spinner_dropdown_item)
@@ -195,7 +221,7 @@ class MainActivity : CoroutineScopeActivity() {
             binding.progressBar.visibility = View.VISIBLE
             val destinationResult = HotelRetrofit.service.searchDestination(
                 query,
-                Locale.getDefault().toString()
+                localeSelected
             )
             binding.progressBar.visibility = View.GONE
             if (destinationResult.suggestions[1].entities.isEmpty()) {
