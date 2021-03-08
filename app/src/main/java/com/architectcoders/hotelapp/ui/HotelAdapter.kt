@@ -11,7 +11,6 @@ import kotlin.properties.Delegates
 
 class HotelAdapter(private val listener: (Hotel) -> Unit) :
         RecyclerView.Adapter<HotelAdapter.ViewHolder>() {
-
     var hotels: List<Hotel> by Delegates.observable(emptyList()) { _, old, new ->
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
@@ -26,6 +25,11 @@ class HotelAdapter(private val listener: (Hotel) -> Unit) :
         }).dispatchUpdatesTo(this)
     }
 
+    private var selectedId: String = ""
+
+    @JvmName("getSelectedId1")
+    fun getSelectedId(): String = selectedId
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.custom_list_destination, false)
         return ViewHolder(view)
@@ -36,6 +40,7 @@ class HotelAdapter(private val listener: (Hotel) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hotel = hotels[position]
         holder.bind(hotel)
+        selectedId = hotel.destinationId
         holder.itemView.setOnClickListener {
             hotels = emptyList()
             listener(hotel)
