@@ -1,41 +1,42 @@
 package com.architectcoders.hotelapp.model
 
+import com.architectcoders.hotelapp.BuildConfig
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 interface ApiService {
     @Headers(
-            "x-rapidapi-key: $API_KEY",
-            "x-rapidapi-host: $API_HOST"
+        "x-rapidapi-key: ${BuildConfig.API_KEY}",
+        "x-rapidapi-host: ${BuildConfig.API_HOST}"
     )
-    @GET("$API_BASE_URL/get-meta-data")
+    @GET("${BuildConfig.API_BASE_URL}/get-meta-data")
     suspend fun listCountries(): List<Country>
 
     @Headers(
-            "x-rapidapi-key: $API_KEY",
-            "x-rapidapi-host: $API_HOST"
+        "x-rapidapi-key: ${BuildConfig.API_KEY}",
+        "x-rapidapi-host: ${BuildConfig.API_HOST}"
     )
-    @GET("$API_BASE_URL/locations/search")
+    @GET("${BuildConfig.API_BASE_URL}/locations/search")
     suspend fun searchDestination(@Query("query") query: String
                                   , @Query("locale") locale: String
     ): DestinationResult
 
     @Headers(
-        "x-rapidapi-key: $API_KEY",
-        "x-rapidapi-host: $API_HOST"
+        "x-rapidapi-key: ${BuildConfig.API_KEY}",
+        "x-rapidapi-host: ${BuildConfig.API_HOST}"
     )
-    @GET("$API_BASE_URL/properties/list")
-    suspend fun listHotels(@Query("destinationId") destinationId: Int = 10234237
-                           , @Query("pageNumber") pageNumber: String = "1"
-                           , @Query("pageSize") pageSize: String = "10"
-                           , @Query("currency") currency: String = "USD"
-                           , @Query("locale") locale: String = "es_ES"
-                           , @Query("sortOrder") sortOrder: String = "PRICE"
-                           , @Query("checkIn") checkIn: String = "2020-02-20"
-                           , @Query("checkOut") checkOut: String = "2020-02-28"
-                           , @Query("adults1") adults1: String = "1"
+
+    @GET("${BuildConfig.API_BASE_URL}/properties/list")
+    suspend fun listHotels(@Query("destinationId") destinationId: Int
+                           , @Query("pageNumber") pageNumber: String = ""
+                           , @Query("pageSize") pageSize: String = ""
+                           , @Query("currency") currency: String = ""
+                           , @Query("locale") locale: String = ""
+                           , @Query("sortOrder") sortOrder: String = ""
+                           , @Query("checkIn") checkIn: String = ""
+                           , @Query("checkOut") checkOut: String = ""
+                           , @Query("adults1") adults1: String = ""
                            , @Query("adults2") adults2: String = ""
                            , @Query("adults3") adults3: String = ""
                            , @Query("adults4") adults4: String = ""
@@ -59,4 +60,17 @@ interface ApiService {
                            , @Query("startRatings") startRatings: String = ""
                            , @Query("themelds") themelds: String = ""
     ): HotelListSerializer
+
+    @Headers(
+        "x-rapidapi-key: ${BuildConfig.API_KEY}",
+        "x-rapidapi-host: ${BuildConfig.API_HOST}"
+    )
+    @GET("${BuildConfig.API_BASE_URL}/properties/get-details")
+    suspend fun getDetail(@Query("id") id: Int
+                          , @Query("locale") locale: String = ""
+                          , @Query("currency") currency: String = ""
+                          , @Query("checkIn") checkIn: String = ""
+                          , @Query("checkOut") checkOut: String = ""
+                          , @Query("adults1") adults1: String = ""
+    ): HotelDetailSerializer
 }

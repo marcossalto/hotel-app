@@ -7,12 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 fun Context.toast(message: Int) {
@@ -50,7 +51,11 @@ fun Int.mod9(): Boolean {
 }
 
 fun ImageView.loadUrl(url: String) {
-    Glide.with(context).load(url).transition(DrawableTransitionOptions.withCrossFade()).into(this)
+    Glide.with(context)
+        .load(url)
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .transform(CenterCrop(), RoundedCorners(24))
+        .into(this)
 }
 
 inline fun <reified T : Activity> Context.intentFor(body: Intent.() -> Unit): Intent =

@@ -16,4 +16,13 @@
     <style name="customRatingBar"
         parent="android:style/Widget.Material.RatingBar.Small">
     </style>
+    <style name="Theme.HotelApp.DarkOverlay" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.HotelApp.NoActionBar" parent="Theme.HotelApp">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.HotelApp.NoActionBar.FullScreen" parent="@style/Theme.HotelApp.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

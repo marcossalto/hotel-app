@@ -8,18 +8,34 @@ import com.architectcoders.hotelapp.ui.common.CoroutineScopeActivity
 import kotlinx.coroutines.launch
 
 class ListActivity : CoroutineScopeActivity() {
-    private val adapter = HotelListAdapter()
+    private lateinit var destinationId: String
+    private lateinit var checkIn: String
+    private lateinit var checkOut: String
+    private lateinit var adults1: String
+    private lateinit var locale: String
+    private lateinit var currency: String
+
+    private val adapter = HotelListAdapter {
+        startActivity<DetailActivity> {
+            putExtra(DetailActivity.HOTEL, it)
+            putExtra("checkIn", checkIn)
+            putExtra("checkOut", checkOut)
+            putExtra("adults1", adults1)
+            putExtra("locale", locale)
+            putExtra("currency", currency)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val destinationId: String = intent.getStringExtra("destinationId").toString()
-        val checkIn: String = intent.getStringExtra("checkIn").toString().toISODate()
-        val checkOut: String = intent.getStringExtra("checkOut").toString().toISODate()
+        destinationId = intent.getStringExtra("destinationId").toString()
+        checkIn = intent.getStringExtra("checkIn").toString().toISODate()
+        checkOut = intent.getStringExtra("checkOut").toString().toISODate()
         var adults: Int = intent.getIntExtra("adults", 0)
         val rooms: Int = intent.getIntExtra("rooms", 1)
 
-        var adults1 = ""
+        adults1 = ""
         var adults2 = ""
         var adults3 = ""
         var adults4 = ""
@@ -30,7 +46,6 @@ class ListActivity : CoroutineScopeActivity() {
 
         val r = (adults / rooms.toDouble())
         var f = kotlin.math.floor(r).toInt()
-        val c = kotlin.math.ceil(r).toInt()
         var resto = adults
 
         for(i in 1..rooms){
@@ -120,8 +135,8 @@ class ListActivity : CoroutineScopeActivity() {
         var children8 = ""
         val stars: Int = intent.getIntExtra("stars", 1)
         val priceMax: Int = intent.getIntExtra("priceMax", 0)
-        val locale: String = intent.getStringExtra("locale").toString()
-        val currency = "USD"
+        locale = intent.getStringExtra("locale").toString()
+        currency = "USD"
 
         with(ActivityListBinding.inflate(layoutInflater)) {
             setContentView(root)

@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotelApp">
         <activity
+            android:name=".ui.DetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.HotelApp.NoActionBar.FullScreen"/>
+        <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -24,4 +28,5 @@
             android:name=".ui.ListActivity"
             android:screenOrientation="portrait" />
     </application>
+
 </manifest>
