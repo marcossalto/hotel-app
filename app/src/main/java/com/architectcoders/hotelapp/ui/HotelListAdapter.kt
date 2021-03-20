@@ -9,7 +9,7 @@ import com.architectcoders.hotelapp.databinding.ActivityListItemBinding
 import com.architectcoders.hotelapp.model.HotelSerializer
 import kotlin.properties.Delegates
 
-class HotelListAdapter : RecyclerView.Adapter<HotelListAdapter.ViewHolder>() {
+class HotelListAdapter(private val listener: (HotelSerializer) -> Unit) : RecyclerView.Adapter<HotelListAdapter.ViewHolder>() {
 
     var hotels: List<HotelSerializer> by Delegates.observable(emptyList()) { _, old, new ->
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
@@ -35,19 +35,24 @@ class HotelListAdapter : RecyclerView.Adapter<HotelListAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hotel = hotels[position]
         holder.bind(hotel)
+        holder.itemView.setOnClickListener {
+            listener(hotel)
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ActivityListItemBinding.bind(view)
         fun bind(hotel: HotelSerializer) {
             with (binding){
-                thumbnail.loadUrl(hotel.optimizedThumbUrls.srpDesktop)
+                ivThumbnail.loadUrl(hotel.optimizedThumbUrls.srpDesktop)
                 tvName.text = hotel.name
                 tvStreetAddress.text = hotel.address.streetAddress
                 ratingBar.rating = hotel.starRating.toFloat()
-                landmark.text = hotel.landmarks[0].label
-                distance.text = hotel.landmarks[0].distance
-                price.text = hotel.ratePlan?.price?.current
+                with(hotel.landmarks.first()){
+                    tvLandmark.text = label
+                    tvDistance.text = distance
+                }
+                tvPrice.text = hotel.ratePlan?.price?.current
             }
         }
     }

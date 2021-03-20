@@ -1,5 +1,6 @@
 package com.architectcoders.hotelapp.model
 
+import com.architectcoders.hotelapp.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,7 +14,7 @@ object HotelRetrofit {
     }
 
     val service: ApiService = Retrofit.Builder()
-        .baseUrl(API_BASE_URL)
+        .baseUrl(BuildConfig.API_BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

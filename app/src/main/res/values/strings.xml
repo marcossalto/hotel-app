@@ -14,4 +14,25 @@
     <string name="message_empty_checkin">Debes seleccionar una fecha inicial</string>
     <string name="message_min_checkout">La fecha no puede ser menor a la del CheckIn</string>
     <string name="message_without_results">No existen resultados para esa busqueda</string>
+    <string name="amenities">Comodidades</string>
+    <string name="transportation">Transporte</string>
+    <string name="neighborhood">Barrio</string>
+    <string name="guest_reviews">Comentarios de los huéspedes</string>
+    <string name="hotel_badge">Insignia del hotel</string>
+    <string name="hotel_welcome_rewards">Recompensas de bienvenida del hotel</string>
+    <string name="hygiene_and_cleanliness">Higiene y limpieza</string>
+    <string name="miscellaneous">Varios</string>
+    <string name="overview">Visión general</string>
+    <string name="page_info">Información de la página</string>
+    <string name="php_header">Encabezado pdp</string>
+    <string name="property_description">Descripción de propiedad</string>
+    <string name="small_print">Pequeña impresión</string>
+    <string name="special_features">Características especiales</string>
+    <string name="at_a_glance">De un vistazo</string>
+    <string name="arriving_leaving">Llegando Saliendo</string>
+    <string name="hotel_size">Tamaño del hotel</string>
+    <string name="required_at_checkin">Requerido al registrarse</string>
+    <string name="special_checkin_instructions">Instrucciones especiales de registro</string>
+    <string name="transport_and_others">Transporte y otros</string>
+    <string name="travelling_or_internet">Viajar o Internet</string>
 </resources>
