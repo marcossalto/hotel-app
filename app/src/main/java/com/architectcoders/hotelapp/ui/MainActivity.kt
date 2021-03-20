@@ -2,15 +2,12 @@ package com.architectcoders.hotelapp.ui
 
 import android.R.layout.*
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.widget.*
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.architectcoders.hotelapp.R.string.*
 import com.architectcoders.hotelapp.databinding.ActivityMainBinding
-import com.architectcoders.hotelapp.model.Country
 import com.architectcoders.hotelapp.model.HotelRetrofit
 import com.architectcoders.hotelapp.ui.common.CoroutineScopeActivity
 import kotlinx.coroutines.launch
@@ -24,7 +21,7 @@ class MainActivity : CoroutineScopeActivity() {
     private val rooms = arrayOf("1", "2", "3", "4", "5", "6", "7", "8")
     private val rankings = arrayOf("1", "2", "3", "4", "5")
     private val maxRommies = 9
-    private val simpleDateFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
+    private val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     private val todayString = simpleDateFormat.format(Date())
 
     private val adapter = HotelAdapter {
@@ -53,6 +50,29 @@ class MainActivity : CoroutineScopeActivity() {
 
         textChangeEtAdult()
         textChangeEtChild()
+
+        initializeBtSearch()
+    }
+
+    private fun initializeBtSearch() {
+        binding.btnSearch.setOnClickListener {
+            if(adapter.getSelectedId().isEmpty())
+                toast("Ingrese un destino")
+            else
+            startActivity<ListActivity> {
+                with(binding){
+                    putExtra("destinationId", adapter.getSelectedId())
+                    putExtra("checkIn",etCheckOut.text.toString())
+                    putExtra("checkOut",etCheckOut.text.toString())
+                    putExtra("adults", if (etAdult.text.toString().isNotEmpty()) etAdult.text.toString().toInt() else 0)
+                    putExtra("children", if (etChild.text.toString().isNotEmpty()) etChild.text.toString().toInt() else 0)
+                    putExtra("rooms", if (spRoom.selectedItem.toString().isNotEmpty()) spRoom.selectedItem.toString().toInt() else 0)
+                    putExtra("stars",spRanking.selectedItemId.toString().toInt())
+                    putExtra("priceMax", if (etTopPrice.text.toString().isNotEmpty()) etTopPrice.text.toString().toInt() else 0)
+                    putExtra("locale",localeSelected)
+                }
+            }
+        }
     }
 
     private fun textChangeEtChild() {
@@ -229,15 +249,14 @@ class MainActivity : CoroutineScopeActivity() {
                 hideKeyboard()
                 toggleViewComponents(false)
             } else {
-                adapter.hotels = destinationResult.suggestions[1].entities
+                adapter.hotels = destinationResult.suggestions[0].entities
             }
         }
     }
 
     private fun isEqualOrGreaterThan(selectDateString: String, compareDateString: String = todayString): Boolean {
-        val formatDate = simpleDateFormat
-        val selectDate = formatDate.parse(selectDateString)
-        val compareDate = formatDate.parse(compareDateString)
+        val selectDate = simpleDateFormat.parse(selectDateString)
+        val compareDate = simpleDateFormat.parse(compareDateString)
 
         return if (selectDate != null && compareDate != null) {
             selectDate.after(compareDate) || selectDate == compareDate
