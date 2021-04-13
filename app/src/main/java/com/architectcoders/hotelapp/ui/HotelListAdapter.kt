@@ -10,20 +10,10 @@ import com.architectcoders.hotelapp.model.HotelSerializer
 import kotlin.properties.Delegates
 
 class HotelListAdapter(private val listener: (HotelSerializer) -> Unit) : RecyclerView.Adapter<HotelListAdapter.ViewHolder>() {
-
-    var hotels: List<HotelSerializer> by Delegates.observable(emptyList()) { _, old, new ->
-        DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                old[oldItemPosition].id == new[newItemPosition].id
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                old[oldItemPosition] == new[newItemPosition]
-
-            override fun getOldListSize(): Int = old.size
-
-            override fun getNewListSize(): Int = new.size
-        }).dispatchUpdatesTo(this)
-    }
+    var hotels: List<HotelSerializer> by basicDiffUtil(
+        emptyList(),
+        areItemsTheSame = { old, new -> old.id == new.id }
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.activity_list_item, false)
