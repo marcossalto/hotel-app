@@ -1,4 +1,4 @@
-package com.architectcoders.hotelapp.ui
+package com.architectcoders.hotelapp.ui.detail
 
 import android.content.Context
 import android.util.AttributeSet

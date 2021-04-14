@@ -1,4 +1,4 @@
-package com.architectcoders.hotelapp.ui
+package com.architectcoders.hotelapp.ui.detail
 
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.architectcoders.hotelapp.model.Hotel
 import com.architectcoders.hotelapp.R
 import com.architectcoders.hotelapp.databinding.CustomListDestinationBinding
+import com.architectcoders.hotelapp.ui.inflate
 import kotlin.properties.Delegates
 
 class HotelAdapter(private val listener: (Hotel) -> Unit) :

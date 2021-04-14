@@ -1,4 +1,4 @@
-package com.architectcoders.hotelapp.ui
+package com.architectcoders.hotelapp.ui.main
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.architectcoders.hotelapp.R
 import com.architectcoders.hotelapp.model.Country
+import com.architectcoders.hotelapp.ui.capitalizeWords
 import com.bumptech.glide.Glide
 
 class CountrySpinnerAdapter (private val context: Context, var dataSource: List<Country>) : BaseAdapter() {

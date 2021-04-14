@@ -1,13 +1,14 @@
-package com.architectcoders.hotelapp.ui
+package com.architectcoders.hotelapp.ui.list
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.architectcoders.hotelapp.R
 import com.architectcoders.hotelapp.databinding.ActivityListItemBinding
 import com.architectcoders.hotelapp.model.HotelSerializer
-import kotlin.properties.Delegates
+import com.architectcoders.hotelapp.ui.basicDiffUtil
+import com.architectcoders.hotelapp.ui.inflate
+import com.architectcoders.hotelapp.ui.loadUrl
 
 class HotelListAdapter(private val listener: (HotelSerializer) -> Unit) : RecyclerView.Adapter<HotelListAdapter.ViewHolder>() {
     var hotels: List<HotelSerializer> by basicDiffUtil(

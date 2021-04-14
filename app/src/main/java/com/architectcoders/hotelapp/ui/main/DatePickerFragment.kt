@@ -1,4 +1,4 @@
-package com.architectcoders.hotelapp.ui
+package com.architectcoders.hotelapp.ui.main
 
 import android.app.DatePickerDialog
 import android.app.Dialog
