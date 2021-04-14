@@ -1,4 +1,4 @@
-package com.architectcoders.hotelapp.ui
+package com.architectcoders.hotelapp.ui.main
 
 import android.R.layout.*
 import android.os.Bundle
@@ -9,7 +9,10 @@ import androidx.core.widget.addTextChangedListener
 import com.architectcoders.hotelapp.R.string.*
 import com.architectcoders.hotelapp.databinding.ActivityMainBinding
 import com.architectcoders.hotelapp.model.HotelRetrofit
+import com.architectcoders.hotelapp.ui.*
 import com.architectcoders.hotelapp.ui.common.CoroutineScopeActivity
+import com.architectcoders.hotelapp.ui.detail.HotelAdapter
+import com.architectcoders.hotelapp.ui.list.ListActivity
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*

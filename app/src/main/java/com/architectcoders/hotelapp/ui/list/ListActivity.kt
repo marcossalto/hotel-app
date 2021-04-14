@@ -1,10 +1,13 @@
-package com.architectcoders.hotelapp.ui
+package com.architectcoders.hotelapp.ui.list
 
 import android.os.Bundle
 import android.view.View
 import com.architectcoders.hotelapp.databinding.ActivityListBinding
 import com.architectcoders.hotelapp.model.HotelRetrofit
 import com.architectcoders.hotelapp.ui.common.CoroutineScopeActivity
+import com.architectcoders.hotelapp.ui.detail.DetailActivity
+import com.architectcoders.hotelapp.ui.startActivity
+import com.architectcoders.hotelapp.ui.toISODate
 import kotlinx.coroutines.launch
 
 class ListActivity : CoroutineScopeActivity() {

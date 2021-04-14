@@ -1,4 +1,4 @@
-package com.architectcoders.hotelapp.ui
+package com.architectcoders.hotelapp.ui.detail
 
 import android.os.Bundle
 import com.architectcoders.hotelapp.databinding.ActivityDetailBinding

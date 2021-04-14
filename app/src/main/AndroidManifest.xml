@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotelApp">
         <activity
-            android:name=".ui.DetailActivity"
+            android:name=".ui.detail.DetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.HotelApp.NoActionBar.FullScreen"/>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ListActivity"
+            android:name=".ui.list.ListActivity"
             android:screenOrientation="portrait" />
     </application>
 
