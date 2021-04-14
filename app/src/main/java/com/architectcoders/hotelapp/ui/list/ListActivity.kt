@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.architectcoders.hotelapp.databinding.ActivityListBinding
 import com.architectcoders.hotelapp.model.HotelRetrofit
+import com.architectcoders.hotelapp.model.SelectedSearch
 import com.architectcoders.hotelapp.ui.common.CoroutineScopeActivity
 import com.architectcoders.hotelapp.ui.detail.DetailActivity
 import com.architectcoders.hotelapp.ui.startActivity
@@ -20,12 +21,16 @@ class ListActivity : CoroutineScopeActivity() {
 
     private val adapter = HotelListAdapter {
         startActivity<DetailActivity> {
-            putExtra(DetailActivity.HOTEL, it)
-            putExtra("checkIn", checkIn)
-            putExtra("checkOut", checkOut)
-            putExtra("adults1", adults1)
-            putExtra("locale", locale)
-            putExtra("currency", currency)
+            val selectedSearch = SelectedSearch(
+                hotel = it,
+                id = it.id.toString(),
+                checkIn = checkIn,
+                checkOut = checkOut,
+                adults1 = adults1,
+                locale = locale,
+                currency = currency
+            )
+            putExtra(DetailActivity.HOTEL, selectedSearch)
         }
     }
 
