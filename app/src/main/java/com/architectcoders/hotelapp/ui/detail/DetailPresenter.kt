@@ -1,13 +1,12 @@
 package com.architectcoders.hotelapp.ui.detail
 
-import com.architectcoders.hotelapp.model.HotelDetailRepository
+import com.architectcoders.hotelapp.model.HotelRepository
 import com.architectcoders.hotelapp.model.HotelDetailSerializer
 import com.architectcoders.hotelapp.model.SelectedSearch
 import com.architectcoders.hotelapp.ui.common.Scope
 import kotlinx.coroutines.launch
 
-class DetailPresenter(private val hotelDetailRepository: HotelDetailRepository) : Scope by Scope.Impl()  {
-
+class DetailPresenter(private val hotelRepository: HotelRepository) : Scope by Scope.Impl()  {
     private var view: View? = null
 
     interface View {
@@ -20,9 +19,12 @@ class DetailPresenter(private val hotelDetailRepository: HotelDetailRepository) 
         initScope()
         this.view = view
         launch {
-            view.showProgress()
-            view.updateData(hotelDetailRepository.getDetail(selectedSearch))
-            view.hideProgress()
+            with(view) {
+                showProgress()
+                updateData(hotelRepository.getDetail(selectedSearch))
+                hideProgress()
+            }
+
         }
     }
 

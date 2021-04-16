@@ -14,7 +14,7 @@ class DetailActivity : CoroutineScopeActivity(), DetailPresenter.View {
         const val HOTEL = "DetailActivity:hotel"
     }
 
-    private val presenter by lazy { DetailPresenter(HotelDetailRepository()) }
+    private val presenter by lazy { DetailPresenter(HotelRepository()) }
     private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,13 +48,13 @@ class DetailActivity : CoroutineScopeActivity(), DetailPresenter.View {
 
     private fun updateHeader(selectedSearch: SelectedSearch) {
         with(binding) {
-            tbHotelDetail.title = selectedSearch.hotel.name
+            tbHotelDetail.title = selectedSearch.hotel?.name
             Glide.with(root.context)
-                .load(selectedSearch.hotel.optimizedThumbUrls.srpDesktop)
+                .load(selectedSearch.hotel?.optimizedThumbUrls?.srpDesktop)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .transform(CenterCrop())
                 .into(ivHotelDetail)
-            tvHotelDetailSummary.text = selectedSearch.hotel.name
+            tvHotelDetailSummary.text = selectedSearch.hotel?.name
         }
     }
 }

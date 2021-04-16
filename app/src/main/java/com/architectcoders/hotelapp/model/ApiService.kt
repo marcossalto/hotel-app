@@ -66,7 +66,7 @@ interface ApiService {
         "x-rapidapi-host: ${BuildConfig.API_HOST}"
     )
     @GET("${BuildConfig.API_BASE_URL}/properties/get-details")
-    suspend fun getDetail(@Query("id") id: Int
+    suspend fun getDetail(@Query("id") id: String = ""
                           , @Query("locale") locale: String = ""
                           , @Query("currency") currency: String = ""
                           , @Query("checkIn") checkIn: String = ""
