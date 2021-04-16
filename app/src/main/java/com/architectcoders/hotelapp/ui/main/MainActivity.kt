@@ -9,6 +9,7 @@ import androidx.core.widget.addTextChangedListener
 import com.architectcoders.hotelapp.R.string.*
 import com.architectcoders.hotelapp.databinding.ActivityMainBinding
 import com.architectcoders.hotelapp.model.HotelRetrofit
+import com.architectcoders.hotelapp.model.SelectedSearch
 import com.architectcoders.hotelapp.ui.*
 import com.architectcoders.hotelapp.ui.common.CoroutineScopeActivity
 import com.architectcoders.hotelapp.ui.detail.HotelAdapter
@@ -64,15 +65,17 @@ class MainActivity : CoroutineScopeActivity() {
             else
             startActivity<ListActivity> {
                 with(binding){
-                    putExtra("destinationId", adapter.getSelectedId())
-                    putExtra("checkIn",etCheckOut.text.toString())
-                    putExtra("checkOut",etCheckOut.text.toString())
-                    putExtra("adults", if (etAdult.text.toString().isNotEmpty()) etAdult.text.toString().toInt() else 0)
-                    putExtra("children", if (etChild.text.toString().isNotEmpty()) etChild.text.toString().toInt() else 0)
-                    putExtra("rooms", if (spRoom.selectedItem.toString().isNotEmpty()) spRoom.selectedItem.toString().toInt() else 0)
-                    putExtra("stars",spRanking.selectedItemId.toString().toInt())
-                    putExtra("priceMax", if (etTopPrice.text.toString().isNotEmpty()) etTopPrice.text.toString().toInt() else 0)
-                    putExtra("locale",localeSelected)
+                    val selectedSearch = SelectedSearch()
+                    selectedSearch.destinationId = adapter.getSelectedId().toInt()
+                    selectedSearch.checkIn = etCheckIn.text.toString().toISODate()
+                    selectedSearch.checkOut = etCheckOut.text.toString().toISODate()
+                    selectedSearch.adults = if (etAdult.text.toString().isNotEmpty()) etAdult.text.toString().toInt() else 0
+                    selectedSearch.childrens = if (etChild.text.toString().isNotEmpty()) etChild.text.toString().toInt() else 0
+                    selectedSearch.rooms = if (spRoom.selectedItem.toString().isNotEmpty()) spRoom.selectedItem.toString().toInt() else 0
+                    selectedSearch.stars = spRanking.selectedItemId.toString().toInt()
+                    selectedSearch.priceMax = if (etTopPrice.text.toString().isNotEmpty()) etTopPrice.text.toString() else ""
+                    selectedSearch.locale = localeSelected
+                    putExtra(ListActivity.SELECTED_SEARCH, selectedSearch)
                 }
             }
         }
@@ -160,7 +163,7 @@ class MainActivity : CoroutineScopeActivity() {
                     if (text.isEmpty()) {
                         etCheckOutInter.cleanAndShowError(message_empty_checkin)
                     } else {
-                        val checkInDateString = toString()
+                        val checkInDateString = text.toString()
 
                         if (isEqualOrGreaterThan(it, checkInDateString)) {
                             etCheckOutInter.setText(it)
@@ -281,8 +284,3 @@ class MainActivity : CoroutineScopeActivity() {
         }
     }
 }
-
-
-
-
-
